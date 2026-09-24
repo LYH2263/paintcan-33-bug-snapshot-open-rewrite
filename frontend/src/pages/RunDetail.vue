@@ -26,6 +26,5 @@ watch(() => route.params.id, (id) => load(id))
     <tr><td>涂布率</td><td>{{ item.result.coverage }} m²/升</td></tr>
     <tr><td>遍数</td><td>{{ item.result.coats }} 遍</td></tr>
   </table>
-  <p v-if="item?.snapshot_rewritten" class="muted">已按当前房间与设置刷新用量。</p>
   <p><router-link to="/history">返回记录列表</router-link></p>
 </div></template>

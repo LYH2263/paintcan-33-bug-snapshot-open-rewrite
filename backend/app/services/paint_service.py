@@ -14,14 +14,10 @@ class PaintService:
         return {"room": r, "openings": openings.for_room(self._c, rid)}
     def settings(self): return settings.get_map(self._c)
     def history(self, limit=50):
-        from app.services.snapshot_live import list_keeps_pin
-        return [list_keeps_pin(r) for r in runs.list_recent(self._c, limit)]
+        return runs.list_recent(self._c, limit)
     def run_detail(self, run_id):
-        row = runs.get_by_id(self._c, run_id)
-        if not row:
-            return None
-        from app.services.snapshot_live import detail_with_live
-        return detail_with_live(self._c, row)
+        # 只读：按号打开返回写入时钉选的结果，绝不按现行房间参数重算或回写
+        return runs.get_by_id(self._c, run_id)
     def estimate(self, room_id, persist, coats=None, coverage=None):
         detail = self.room_detail(room_id)
         if not detail: return None

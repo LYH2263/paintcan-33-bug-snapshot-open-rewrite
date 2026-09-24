@@ -29,9 +29,3 @@ def list_recent(conn, limit=50):
 
 def count(conn):
     return int(conn.execute("SELECT COUNT(*) c FROM calc_runs").fetchone()["c"])
-
-
-def raw_result(row):
-    """Pinned result without live rewrite (list path uses decode directly)."""
-    d = decode(row) if not isinstance(row, dict) or "result" not in row else row
-    return d.get("result")
